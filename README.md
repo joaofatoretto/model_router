@@ -2,17 +2,53 @@
 
 **Send each piece of a task to the cheapest Claude model that can do it well, and check the result.**
 
-A Claude Code plugin with three skills. The main one turns an Opus 5.5 session into a coordinator: it plans the task, hands each piece to a Haiku 5.5, Sonnet 5.5 or Opus 5.5 subagent at the right effort level, and verifies every result before accepting it. The other two help you write your own skills and subagents with the same lessons built in.
+A Claude Code plugin with coordinator skills and a roster of 18 subagents for code, design and video work. The coordinators turn an Opus 5.5 session into a lead: it plans the task, hands each piece to a Haiku 5.5, Sonnet 5.5 or Opus 5.5 subagent at the right effort level, and verifies every result before accepting it. Two more skills help you write your own skills and subagents with the same lessons built in.
 
 ## The skills
 
 | Skill | What it does |
 | --- | --- |
-| `coordinating-subagents` | Plans a coding or design task, routes each piece to a model and effort level, briefs workers so they can start cold, and checks their work by reading diffs and rerunning tests itself. |
+| `coordinating-subagents` | The default coordinator. Plans a task, routes each piece to a model and effort level, briefs workers so they can start cold, and checks their work by reading diffs and rerunning tests itself. |
+| `coordinating-code` | Adds the code agents and a build, test and review flow to the default coordinator. |
+| `coordinating-design` | Adds the design agents and a research, flow, direction, build and review flow, with checkpoints where you choose the direction. |
+| `coordinating-video` | Adds the video agents and a script-to-render flow in Remotion, with a budget for image and video generation. |
 | `creating-skills` | Writes or revises a `SKILL.md`: when a skill is the right tool, frontmatter, trigger descriptions, a concise body, supporting files and testing. |
 | `creating-subagents` | Writes or revises a subagent definition in `.claude/agents/`: model and effort for the role, the fewest tools needed, a system prompt with a report the parent can verify, and testing. |
 
 Claude loads a skill on its own when your request matches it, or you can call it directly, for example `/model-router:coordinating-subagents`.
+
+## The agents
+
+Each agent has a default model and effort. A coordinator can override both per call.
+
+| Area | Agent | Default | What it does |
+| --- | --- | --- | --- |
+| Code | `test-runner` | Haiku `medium` | Runs tests, type-check, lint or build, and triages the failures. It never fixes anything |
+| Code | `build-error-resolver` | Haiku `medium` | Fixes type, lint, import and build errors with minimal diffs |
+| Code | `e2e-runner` | Haiku `medium` | Checks user flows in a real browser with Playwright |
+| Code | `debugger` | Sonnet `high` | Reproduces a bug, confirms the root cause, fixes it and adds a regression test |
+| Code | `spec-reviewer` | Sonnet `high` | Checks the change against what was asked, requirement by requirement. Read-only |
+| Code | `code-reviewer` | Sonnet `high` | Reviews a diff for bugs, regressions and security, with `file:line` evidence. Read-only |
+| Design | `ux-researcher` | Sonnet `medium` | Synthesizes feedback, interviews and competitor patterns into sourced findings |
+| Design | `interaction-designer` | Opus `medium` | Maps flows, information architecture and every screen state, and can draw in FigJam |
+| Design | `ui-designer` | Opus `medium` | Explores distinct visual directions as Figma frames or HTML mockups |
+| Design | `design-system-guardian` | Haiku `medium` | Audits Figma and code against tokens and components. Read-only |
+| Design | `ux-writer` | Sonnet `medium` | Writes interface copy and checks it for consistency |
+| Design | `visual-qa` | Haiku `medium` | Screenshots the UI across viewports and states and lists visible defects, without reading code |
+| Design | `design-critic` | Opus `medium` | Critiques a design from screenshots only, as an independent second opinion |
+| Assets | `motion-designer` | Sonnet `medium` | Builds UI motion, Lottie, Rive and Remotion motion graphics |
+| Assets | `illustrator` | Opus `medium` | Draws SVG or Figma illustrations, writes style guides and art-direction briefs |
+| Assets | `image-generator` | Sonnet `medium` | Generates images with the connected generation tool, within a budget |
+| Video | `video-generator` | Sonnet `medium` | Generates short clips with the connected generation tool, testing before the final clip |
+| Video | `video-editor` | Sonnet `medium` | Builds and renders videos in Remotion |
+
+The agents are listed in every session as `model-router:<name>`, so you can also call them directly, for example `@agent-model-router:design-critic`.
+
+Some agents work best with extra tools you install separately:
+- `e2e-runner` and `visual-qa` need the Playwright plugin.
+- The design agents use the [figma-console](https://github.com/southleft/figma-console-mcp) MCP server for Figma work.
+- `image-generator` and `video-generator` need an image or video generation tool, such as fal.ai's MCP server. Without one, they return ready-to-use prompts instead.
+- `motion-designer` and `video-editor` use LottieFiles' [`motion-design`](https://github.com/LottieFiles/motion-design-skill) skill and Remotion's [`remotion-best-practices`](https://github.com/remotion-dev/skills) skill when they're installed.
 
 ## How the coordinator routes work
 
@@ -72,14 +108,18 @@ model_router/
 ├── .claude-plugin/
 │   ├── plugin.json         the manifest
 │   └── marketplace.json    makes this repository installable as a marketplace
+├── agents/                 one file per subagent
 └── skills/
-    ├── coordinating-subagents/SKILL.md
+    ├── coordinating-subagents/SKILL.md    the default coordinator and shared rules
+    ├── coordinating-code/SKILL.md         loads the default, adds the code agents
+    ├── coordinating-design/SKILL.md       loads the default, adds the design agents
+    ├── coordinating-video/SKILL.md        loads the default, adds the video agents
     ├── creating-skills/SKILL.md
     └── creating-subagents/SKILL.md
 ```
 
 ```bash
-claude plugin validate .   # checks the manifest and skills as Claude Code reads them
+claude plugin validate .   # checks the manifest as Claude Code reads it
 ```
 
 To work on it live, install it from a local folder (`claude plugin marketplace add <folder>`). Claude Code then reads the skills straight from that folder, and `/reload-plugins` picks up each edit.
