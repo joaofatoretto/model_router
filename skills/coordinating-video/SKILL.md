@@ -16,7 +16,7 @@ Call each agent by its full name. The model and effort shown are its defaults. A
 | Agent | Default | Use it to |
 | --- | --- | --- |
 | `model-router:ux-writer` | Sonnet `medium` | Write the script, voiceover lines, on-screen text and captions |
-| `model-router:illustrator` | Opus `medium` | Create vector art for the video, or write the art-direction brief for generated assets |
+| `model-router:illustrator` | Opus `medium` | Create vector art for the video (logos, icons, illustrated scenes), layered for animation when motion-designer will animate it |
 | `model-router:image-generator` | Sonnet `medium` | Generate stills, backgrounds and start frames |
 | `model-router:video-generator` | Sonnet `medium` | Generate short clips from text or start frames, testing before the final clip |
 | `model-router:motion-designer` | Sonnet `medium` | Design motion graphics, transitions and animated typography |
@@ -48,7 +48,8 @@ Image and video generation spend the user's credits, so:
 1. **Brief:** agree the goal, audience, platform (aspect ratio, length) and look with the user. Read `DESIGN.md` if it exists.
 2. **Script and storyboard:** ux-writer drafts the script. You turn it into a shot list: for each shot, the content, duration and whether the asset comes from generation, illustration, motion or existing footage. **Checkpoint:** the user approves the script and shot list.
 3. **Assets:** commission what the shot list needs, one big-slot agent at a time:
-   - illustrator writes the art direction before generation, so the generated assets share a style
+   - write a short art-direction block (palette as hex, lighting, lens, grade, style keywords), get it approved, and reuse it word for word in every image and video brief, so the generated assets share a style
+   - illustrator makes the vector art
    - image-generator makes start frames before video-generator animates them
    - motion-designer makes the motion graphics
 4. **Assemble:** video-editor builds the timeline with labelled placeholders for missing assets, and renders key-frame stills.

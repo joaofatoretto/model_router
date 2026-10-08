@@ -12,9 +12,13 @@ A Claude Code plugin with coordinator skills and a roster of 18 subagents for co
 | `coordinating-code` | Adds the code agents and a build, test and review flow to the default coordinator. |
 | `coordinating-design` | Adds the design agents and a research, flow, direction, build and review flow, with checkpoints where you choose the direction. |
 | `coordinating-video` | Adds the video agents and a script-to-render flow in Remotion, with a budget for image and video generation. |
-| `coordinating-images` | Adds the image agents and a flow for generated images, edits and art-directed sets: intake questions, an agreed budget, candidates to choose from, then finals. |
+| `coordinating-images` | Adds the image agents and a flow for raster image generation and editing: intake questions, an agreed budget, candidates to choose from, then finals. |
+| `coordinating-illustration` | Adds the illustration agents and a flow for vector work: style exploration, an approved hero piece, the rest of the set, a technical pass and review. The output is always SVG or Figma vectors, even when a generated concept is used along the way. |
+| `coordinating-motion` | Adds the motion agents and a flow that writes a spec, has you try a prototype, then builds out and verifies, including reduced motion. |
 | `generating-images` | How to generate and edit images well: intake, when not to generate, choosing a model per kind of ask, prompt rules, review, plus playbooks and a dated model reference. Preloaded into `image-generator`. |
 | `generating-videos` | The same for video clips: shot prompts with camera and audio, image-to-video, consistency across shots, cheap tests before finals. Preloaded into `video-generator`. |
+| `illustrating` | How to make vector illustrations: intake, choosing between drawing, AI vector models and tracing a concept, style rules before pieces, clean SVG and Figma vectors, plus playbooks and a vector-tools reference. Preloaded into `illustrator`. |
+| `designing-motion` | How to design and build motion: intake, choosing a medium, writing the spec first, timing and easing by purpose, accessibility, frame-by-frame checks, plus playbooks and default tokens. Preloaded into `motion-designer`. |
 | `creating-skills` | Writes or revises a `SKILL.md`: when a skill is the right tool, frontmatter, trigger descriptions, a concise body, supporting files and testing. |
 | `creating-subagents` | Writes or revises a subagent definition in `.claude/agents/`: model and effort for the role, the fewest tools needed, a system prompt with a report the parent can verify, and testing. |
 
@@ -39,8 +43,8 @@ Each agent has a default model and effort. A coordinator can override both per c
 | Design | `ux-writer` | Sonnet `medium` | Writes interface copy and checks it for consistency |
 | Design | `visual-qa` | Haiku `medium` | Screenshots the UI across viewports and states and lists visible defects, without reading code |
 | Design | `design-critic` | Opus `medium` | Critiques a design from screenshots only, as an independent second opinion |
-| Assets | `motion-designer` | Sonnet `medium` | Builds UI motion, Lottie, Rive and Remotion motion graphics |
-| Assets | `illustrator` | Opus `medium` | Draws SVG or Figma illustrations, writes style guides and art-direction briefs |
+| Assets | `motion-designer` | Sonnet `medium` | Designs and builds motion: UI interactions, Lottie, Rive state machines and runtime, Remotion motion graphics |
+| Assets | `illustrator` | Opus `medium` | Makes vector illustrations and icons (SVG or Figma), by drawing them, generating vectors, or tracing a concept, and writes style guides |
 | Assets | `image-generator` | Sonnet `medium` | Generates images with the connected generation tool, within a budget |
 | Video | `video-generator` | Sonnet `medium` | Generates short clips with the connected generation tool, testing before the final clip |
 | Video | `video-editor` | Sonnet `medium` | Builds and renders videos in Remotion |
@@ -121,6 +125,10 @@ model_router/
     ├── coordinating-images/SKILL.md       loads the default, adds the image agents
     ├── generating-images/                 SKILL.md, plus reference/playbooks.md and reference/models.md
     ├── generating-videos/                 SKILL.md, plus reference/playbooks.md and reference/models.md
+    ├── coordinating-illustration/SKILL.md loads the default, adds the illustration agents
+    ├── coordinating-motion/SKILL.md       loads the default, adds the motion agents
+    ├── illustrating/                      SKILL.md, plus reference/playbooks.md and reference/vector-tools.md
+    ├── designing-motion/                  SKILL.md, plus reference/playbooks.md and reference/tokens-and-tools.md
     ├── creating-skills/SKILL.md
     └── creating-subagents/SKILL.md
 ```

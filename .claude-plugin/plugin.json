@@ -1,7 +1,7 @@
 {
   "name": "model-router",
-  "version": "0.3.0",
-  "description": "Coordinator skills and 18 subagents for routing code, design, image and video work across Haiku, Sonnet and Opus 5.5, plus skills for writing skills and subagents.",
+  "version": "0.4.0",
+  "description": "Coordinator skills and 18 subagents for routing code, design, illustration, motion, image and video work across Haiku, Sonnet and Opus 5.5, plus skills for writing skills and subagents.",
   "author": { "name": "joaofatoretto", "url": "https://github.com/joaofatoretto" },
   "homepage": "https://github.com/joaofatoretto/model_router",
   "repository": "https://github.com/joaofatoretto/model_router",
