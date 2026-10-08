@@ -1,0 +1,10 @@
+{
+  "name": "model-router",
+  "version": "0.1.0",
+  "description": "Skills for coordinating Haiku, Sonnet and Opus 5.5 subagents, and for writing skills and subagent definitions.",
+  "author": { "name": "joaofatoretto", "url": "https://github.com/joaofatoretto" },
+  "homepage": "https://github.com/joaofatoretto/model_router",
+  "repository": "https://github.com/joaofatoretto/model_router",
+  "license": "MIT",
+  "keywords": ["subagents", "model-routing", "effort", "skills", "orchestration"]
+}

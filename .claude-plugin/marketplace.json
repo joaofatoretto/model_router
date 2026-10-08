@@ -1,0 +1,15 @@
+{
+  "name": "model-router",
+  "description": "model-router: skills for routing work across Claude 5.5 models.",
+  "owner": {
+    "name": "joaofatoretto",
+    "url": "https://github.com/joaofatoretto"
+  },
+  "plugins": [
+    {
+      "name": "model-router",
+      "source": "./",
+      "description": "Skills for coordinating Haiku, Sonnet and Opus 5.5 subagents, and for writing skills and subagent definitions."
+    }
+  ]
+}
