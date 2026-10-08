@@ -7,6 +7,16 @@ description: Coordinates a coding task with the model-router code agents (code-r
 
 First read `${CLAUDE_SKILL_DIR}/../coordinating-subagents/SKILL.md` and follow it: the concurrency limits, planning, routing, briefing and verification rules all apply. This skill adds the code agents and the order to use them in.
 
+## What to ask
+
+Read the relevant code first, so you ask only what the code can't answer. For code work, the questions that most often change the result are these:
+
+- **Scope:** what's in and out, and whether nearby problems you noticed should be fixed now or left.
+- **Behavior:** acceptance criteria, edge cases and error handling, especially where the request and the existing code disagree.
+- **Constraints:** compatibility (APIs, data, browsers, versions), performance, and dependencies you may or may not add.
+- **Approach:** when two designs are both reasonable and hard to change later, show both with their trade-offs.
+- **Delivery:** whether to commit, branch, open a PR, or leave the changes uncommitted.
+
 ## Roster
 
 Call each agent by its full name. The model and effort shown are its defaults. A per-call `model` or `effort` overrides them, and the concurrency slot follows the model it actually runs on.

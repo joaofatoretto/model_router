@@ -31,6 +31,15 @@ Before spawning anything for a multi-part or ambiguous task, read enough of the 
 
 Decide the hard questions yourself (architecture, data model, interfaces between pieces) before you hand out implementation work, so workers execute decisions rather than make them.
 
+## Ask the user before you start
+
+Workers can't ask the user anything, so the open questions have to be settled before you brief them. First answer what you can yourself, from the request, the code, `DESIGN.md` and the project docs. Then ask the user only about what's left that would change the result, such as scope, expected behavior, trade-offs or taste.
+
+- Use `AskUserQuestion`: up to four questions in one call, each with two to four concrete options, and your recommended option first.
+- Ask once, before planning is final. Later questions belong at checkpoints, or when a worker reports something new.
+- Skip the round entirely when the request is already clear. Don't ask for confirmation of things you can decide.
+- When a worker returns "needs input" questions instead of a result, put them to the user the same way, then continue that worker with the answers.
+
 ## Routing
 
 The deciding question is whether the solution is known. If it is, it only needs carrying out, and a smaller model does that well. If the model must first find out what is wrong or choose between designs, use a larger one. Size matters less: a 50-file mechanical migration with tests can go to Sonnet, while a 3-file intermittent bug needs Opus.

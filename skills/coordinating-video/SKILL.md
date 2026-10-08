@@ -25,12 +25,23 @@ Call each agent by its full name. The model and effort shown are its defaults. A
 
 Every agent here except design-critic defaults to Sonnet or Opus, so they share the single big slot and run one at a time. Lower the simple ones, such as a caption pass, to Haiku when you want to run two at once.
 
+## What to ask
+
+Check `DESIGN.md` and any existing brand or video assets first. For video work, the questions that most often change the result are these:
+
+- **Goal and audience:** what the viewer should know, feel or do afterwards.
+- **Platform and format:** where it plays, the aspect ratio, the length, and whether it must work with the sound off.
+- **Look and references:** style, pace, brand elements, and examples to match or avoid.
+- **Audio:** voiceover (whose voice, which language), music, sound effects, and captions.
+- **Assets and budget:** footage, screens or images that already exist, and how much image and video generation may spend.
+
 ## Generation costs money
 
 Image and video generation spend the user's credits, so:
 - Before the first generation, check that a generation tool is connected. If none is, tell the user and stop at prompts.
 - Agree the budget with the user: how many images and clips, and how many attempts each.
 - Pass the budget in every generation brief, and track what's been used.
+- The generating-videos and generating-images skills list what each generation brief needs. Collect those answers before you dispatch video-generator or image-generator, so they don't come back with questions.
 
 ## Typical flow
 

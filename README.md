@@ -8,10 +8,13 @@ A Claude Code plugin with coordinator skills and a roster of 18 subagents for co
 
 | Skill | What it does |
 | --- | --- |
-| `coordinating-subagents` | The default coordinator. Plans a task, routes each piece to a model and effort level, briefs workers so they can start cold, and checks their work by reading diffs and rerunning tests itself. |
+| `coordinating-subagents` | The default coordinator. Plans a task, routes each piece to a model and effort level, briefs workers so they can start cold, and checks their work by reading diffs and rerunning tests itself. It asks you about anything still open before it starts, because workers can't ask. |
 | `coordinating-code` | Adds the code agents and a build, test and review flow to the default coordinator. |
 | `coordinating-design` | Adds the design agents and a research, flow, direction, build and review flow, with checkpoints where you choose the direction. |
 | `coordinating-video` | Adds the video agents and a script-to-render flow in Remotion, with a budget for image and video generation. |
+| `coordinating-images` | Adds the image agents and a flow for generated images, edits and art-directed sets: intake questions, an agreed budget, candidates to choose from, then finals. |
+| `generating-images` | How to generate and edit images well: intake, when not to generate, choosing a model per kind of ask, prompt rules, review, plus playbooks and a dated model reference. Preloaded into `image-generator`. |
+| `generating-videos` | The same for video clips: shot prompts with camera and audio, image-to-video, consistency across shots, cheap tests before finals. Preloaded into `video-generator`. |
 | `creating-skills` | Writes or revises a `SKILL.md`: when a skill is the right tool, frontmatter, trigger descriptions, a concise body, supporting files and testing. |
 | `creating-subagents` | Writes or revises a subagent definition in `.claude/agents/`: model and effort for the role, the fewest tools needed, a system prompt with a report the parent can verify, and testing. |
 
@@ -47,7 +50,7 @@ The agents are listed in every session as `model-router:<name>`, so you can also
 Some agents work best with extra tools you install separately:
 - `e2e-runner` and `visual-qa` need the Playwright plugin.
 - The design agents use the [figma-console](https://github.com/southleft/figma-console-mcp) MCP server for Figma work.
-- `image-generator` and `video-generator` need an image or video generation tool, such as fal.ai's MCP server. Without one, they return ready-to-use prompts instead.
+- `image-generator` and `video-generator` need an image or video generation tool, such as fal.ai's MCP server. Without one, they return ready-to-use prompts instead. When a brief is missing essentials, they return questions rather than spending credits.
 - `motion-designer` and `video-editor` use LottieFiles' [`motion-design`](https://github.com/LottieFiles/motion-design-skill) skill and Remotion's [`remotion-best-practices`](https://github.com/remotion-dev/skills) skill when they're installed.
 
 ## How the coordinator routes work
@@ -99,6 +102,7 @@ For the best results, run the coordinator in an Opus 5.5 session at `high` effor
 
 - The concurrency limits, model choices and verification steps are instructions, not enforcement. The coordinator follows them, but nothing blocks a call that breaks them.
 - The routing table reflects the Claude 5.5 models. When new models arrive, revisit it.
+- The image and video model references were last checked on 2026-10-08. Generation models change every few months, so the agents also check what the connected tool offers.
 - The skills haven't been measured against formal evals yet. They're built from Anthropic's published guidance and real use.
 
 ## Development
@@ -114,6 +118,9 @@ model_router/
     ├── coordinating-code/SKILL.md         loads the default, adds the code agents
     ├── coordinating-design/SKILL.md       loads the default, adds the design agents
     ├── coordinating-video/SKILL.md        loads the default, adds the video agents
+    ├── coordinating-images/SKILL.md       loads the default, adds the image agents
+    ├── generating-images/                 SKILL.md, plus reference/playbooks.md and reference/models.md
+    ├── generating-videos/                 SKILL.md, plus reference/playbooks.md and reference/models.md
     ├── creating-skills/SKILL.md
     └── creating-subagents/SKILL.md
 ```
