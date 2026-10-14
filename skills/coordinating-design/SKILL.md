@@ -61,5 +61,19 @@ Besides the base briefing rules, a design brief states:
 - the Figma file or frame link, if there is one
 - the states and viewports that matter
 - where to save outputs
+- the screenshot budget (see below)
 
-Look at every visual output yourself, as screenshots, before you pass it on to the user.
+Look at the visual output yourself before you pass it on to the user, within the same budget.
+
+## Screenshots and token cost
+
+Screenshots are the most expensive thing in a design run. That covers the Figma MCP (`figma_capture_screenshot`), the Playwright MCP, and reading rendered PNGs. A run that screenshots slide after slide can use up the user's session limit.
+
+- **Single, small jobs** (one frame, one slide, one post): screenshots are fine.
+- **Bigger jobs** (several slides, several posts, a whole deck or set): don't take screenshots in a row. Verify with code instead:
+  - a plugin script that audits text sizes, overflow past bounds, unbound styles and tokens, and copy against the source docs
+  - a renderer's own issue list
+  - measurements
+- **If screenshots are really needed on a bigger job**, ask the user first and say how many and why.
+- **Briefs:** every brief for a visual agent states this rule and a cap (for example, "at most 3 screenshots at scale 0.3 without asking; everything else through the audit script"). Agents don't know the user's limits unless the brief says so.
+- **When you do take one:** use low scale, one frame at a time, only where the look itself is the question. Prefer one downscaled contact sheet to many single images.
