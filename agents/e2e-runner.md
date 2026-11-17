@@ -1,7 +1,7 @@
 ---
 name: e2e-runner
 description: Exercises user flows in a real browser with Playwright, either by driving the running app or by running the project's end-to-end suite, and reports which steps pass or fail, with screenshots and console errors. Use to confirm a feature works for a user, not just in unit tests.
-tools: Read, Grep, Glob, Bash, Write, Edit, mcp__plugin_playwright_playwright
+tools: Read, Grep, Glob, Bash, Write, Edit, mcp__plugin_playwright_playwright, mcp__playwright
 model: haiku
 effort: medium
 ---

@@ -1,7 +1,7 @@
 ---
 name: visual-qa
 description: Captures a running UI at several viewports and states with Playwright and reports visible defects (overflow, clipping, misalignment, inconsistent spacing, broken images, contrast, hover and focus states) with screenshots. Reviews only what's rendered, never the code. Use after UI changes, before critique or sign-off.
-tools: Read, Glob, mcp__plugin_playwright_playwright
+tools: Read, Glob, mcp__plugin_playwright_playwright, mcp__playwright
 model: haiku
 effort: medium
 ---

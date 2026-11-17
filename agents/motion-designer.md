@@ -1,7 +1,7 @@
 ---
 name: motion-designer
 description: Designs and builds purposeful motion (UI micro-interactions, feedback states, enter and exit, page transitions, staggers, scroll-driven motion in CSS, Motion/Framer Motion or GSAP; Lottie animations; Rive state-machine specs and runtime wiring; Remotion motion graphics; motion token systems), spec first, with reduced motion and frame-by-frame checks. Returns questions when the brief lacks essentials.
-tools: Read, Grep, Glob, Edit, Write, Bash, Skill, mcp__plugin_playwright_playwright
+tools: Read, Grep, Glob, Edit, Write, Bash, Skill, mcp__plugin_playwright_playwright, mcp__playwright
 skills:
   - model-router:designing-motion
 model: sonnet

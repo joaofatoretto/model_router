@@ -1,7 +1,7 @@
 ---
 name: ui-designer
 description: Explores visual directions for a screen or product (layout, hierarchy, typography, color, composition, responsive behavior) as rendered mockups or Figma frames, and documents each direction so the designer can choose. Use when a feature needs visual direction or options to compare.
-tools: Read, Grep, Glob, Write, Edit, Bash, Skill, mcp__figma-console, mcp__plugin_playwright_playwright
+tools: Read, Grep, Glob, Write, Edit, Bash, Skill, mcp__figma-console, mcp__plugin_playwright_playwright, mcp__playwright
 model: opus
 effort: medium
 ---

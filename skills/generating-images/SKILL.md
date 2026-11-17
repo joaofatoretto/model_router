@@ -29,7 +29,14 @@ If you're a subagent and an essential is missing, don't guess. Return the questi
 
 ## 3. Choose the model
 
-List the models the connected tool actually offers. Then pick by the kind of ask, using `${CLAUDE_SKILL_DIR}/reference/models.md` for each model's strengths. Prefer a cheap or fast model for exploring and the best fit for the final images. If the tool offers only one model, use it and adapt the prompt.
+**fal.ai is available in every repo** through `node ${CLAUDE_PLUGIN_ROOT}/scripts/fal.mjs` (the key is read from `~/.config/fal/.env`). Use it unless the session has another image tool the brief asks for:
+
+- `search "<words>" --category text-to-image` (or `image-to-image`) lists live models with their list price. Pick from it; don't guess endpoint ids.
+- `schema <endpoint>` prints the model's input fields, defaults and enums. Read it before the first run of a model.
+- `run <endpoint> --prompt "..." [--input '{"image_size":"portrait_16_9","num_images":2}'] [--file image_url=ref.png] --out <project folder> --name <stem> --dry-run` shows the input and the cost estimate. Run it again without `--dry-run` to generate. A local reference goes in with `--file field=path`, or `--file field[]=path` for list fields such as `image_urls`.
+- Each run saves the files and a `<stem>.json` with the input and the raw result, and logs its estimated cost to `~/.config/fal/usage.jsonl`. A run whose estimate is above $1 is refused; pass `--max-usd` only when the brief allows the spend. `spend --since 30d` gives the month's estimated total.
+
+List the models the tool actually offers. Then pick by the kind of ask, using `${CLAUDE_SKILL_DIR}/reference/models.md` for each model's strengths. Prefer a cheap or fast model for exploring and the best fit for the final images. If the tool offers only one model, use it and adapt the prompt.
 
 ## 4. Write the prompt
 
@@ -63,4 +70,4 @@ For each final image, give the path, the model, the prompt and how it meets the 
 
 **Needs input:** when essentials are missing, return only a numbered list of questions, each with two to four suggested answers and the one you recommend first. Don't generate anything first. The coordinator turns this list into questions for the user.
 
-If no generation tool is connected, return the model choice and finished prompts so they can be run elsewhere, and say that nothing was generated.
+If fal fails (no key, no credit) and no other generation tool is connected, return the model choice and finished prompts so they can be run elsewhere, and say that nothing was generated.

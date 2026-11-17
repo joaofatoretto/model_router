@@ -29,7 +29,13 @@ If you're a subagent and an essential is missing, don't guess. Return the questi
 
 ## 3. Choose the model
 
-List the models the connected tool actually offers. Then pick by the shot's needs (audio, motion, length, references, cost), using `${CLAUDE_SKILL_DIR}/reference/models.md`. Use a fast or cheap tier for tests, and the best fit for the finals.
+**fal.ai is available in every repo** through `node ${CLAUDE_PLUGIN_ROOT}/scripts/fal.mjs` (key in `~/.config/fal/.env`), and it hosts most video models (Veo, Kling, Seedance, Hailuo and others):
+
+- `search "<words>" --category text-to-video` (or `image-to-video`) lists live models and their price per second. `schema <endpoint>` shows the inputs (duration, aspect ratio, audio, first and last frame fields).
+- `run <endpoint> --prompt "..." --input '{"duration":"5"}' --file image_url=start.png --out <project folder> --name <shot> --dry-run` shows the estimate. Video is priced per second, so always pass `duration`; without it the estimate assumes 10 s. Then run without `--dry-run`. Clips usually take one to five minutes; the script waits up to 15 (`--timeout-s`).
+- A run whose estimate is above $1 is refused. Test on a cheap tier at the shortest duration, and pass `--max-usd` for a final only when the brief allows that spend. Costs are logged to `~/.config/fal/usage.jsonl`; `spend --since 30d` totals them.
+
+List the models the tool actually offers. Then pick by the shot's needs (audio, motion, length, references, cost), using `${CLAUDE_SKILL_DIR}/reference/models.md`. Use a fast or cheap tier for tests, and the best fit for the finals.
 
 ## 4. Write the shot prompt
 
@@ -67,4 +73,4 @@ For each shot, give the clip path, duration, resolution, the model and prompt, a
 
 **Needs input:** when essentials are missing, return only a numbered list of questions, each with two to four suggested answers and the one you recommend first. Don't generate anything first.
 
-If no video tool is connected, return the model choice and finished shot prompts, and say that nothing was generated.
+If fal fails (no key, no credit) and no other video tool is connected, return the model choice and finished shot prompts, and say that nothing was generated.

@@ -1,7 +1,7 @@
 ---
 name: design-critic
 description: Gives an independent, senior critique of a design from screenshots or Figma frames only (hierarchy, clarity, consistency, usability heuristics, fit with the product's principles), without seeing code or the author's reasoning. Use for a second opinion on a direction, or for the final review before sign-off.
-tools: Read, Glob, mcp__figma-console__figma_take_screenshot, mcp__figma-console__figma_get_selection, mcp__figma-console__figma_get_file_data, mcp__plugin_playwright_playwright__browser_navigate, mcp__plugin_playwright_playwright__browser_resize, mcp__plugin_playwright_playwright__browser_take_screenshot
+tools: Read, Glob, mcp__figma-console__figma_take_screenshot, mcp__figma-console__figma_get_selection, mcp__figma-console__figma_get_file_data, mcp__plugin_playwright_playwright__browser_navigate, mcp__playwright__browser_navigate, mcp__plugin_playwright_playwright__browser_resize, mcp__playwright__browser_resize, mcp__plugin_playwright_playwright__browser_take_screenshot, mcp__playwright__browser_take_screenshot
 model: opus
 effort: medium
 ---
